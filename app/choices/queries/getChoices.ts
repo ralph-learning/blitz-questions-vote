@@ -7,7 +7,7 @@ interface GetChoicesInput
 export default resolver.pipe(
   resolver.authorize(),
   async ({ where, orderBy, skip = 0, take = 100 }: GetChoicesInput) => {
-    // TODO: in multi-tenant app, you must add validation to ensure correct tenant
+    console.log(where)
     const {
       items: choices,
       hasMore,

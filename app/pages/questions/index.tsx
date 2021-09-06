@@ -2,8 +2,9 @@ import { Suspense } from "react"
 import { Head, Link, usePaginatedQuery, useRouter, BlitzPage, Routes } from "blitz"
 import Layout from "app/core/layouts/Layout"
 import getQuestions from "app/questions/queries/getQuestions"
+import { Choice } from "db"
 
-const ITEMS_PER_PAGE = 100
+const ITEMS_PER_PAGE = 10
 
 export const QuestionsList = () => {
   const router = useRouter()
@@ -25,6 +26,14 @@ export const QuestionsList = () => {
             <Link href={Routes.ShowQuestionPage({ questionId: question.id })}>
               <a>{question.text}</a>
             </Link>
+
+            <ul>
+              {question.choices.map((choice: Choice) => (
+                <li key={choice.id}>
+                  {choice.text} - [{choice.votes}]
+                </li>
+              ))}
+            </ul>
           </li>
         ))}
       </ul>
